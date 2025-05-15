@@ -6,5 +6,6 @@ MONGODB_HOST = {
 }
 
 MONGODB_DBNAME = 'cyberStudents'
-
+KEY = "thebestsecretkeyintheentireworld"
+PEPPER = "thebestpepperintheentireworld"
 WORKERS = 32

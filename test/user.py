@@ -23,7 +23,12 @@ class UserHandlerTest(BaseTest):
         yield self.get_app().db.users.insert_one({
             'email': self.email,
             'password': self.password,
-            'displayName': self.display_name
+            'displayName': self.display_name,
+            'phoneNumber': '1234567890',
+            'address': '123 Test St',
+            'dateOfBirth': '2000-01-01',
+            'fullName': 'Test User',
+            'disabilities': 'None'
         })
 
     @coroutine
@@ -40,6 +45,11 @@ class UserHandlerTest(BaseTest):
         self.email = 'test@test.com'
         self.password = 'testPassword'
         self.display_name = 'testDisplayName'
+        self.phone_number = '1234567890'
+        self.address = '123 Test St'
+        self.date_of_birth = '2000-01-01'
+        self.full_name = 'Test User'
+        self.disabilities = 'None'
         self.token = 'testToken'
 
         IOLoop.current().run_sync(self.register)
@@ -54,6 +64,12 @@ class UserHandlerTest(BaseTest):
         body_2 = json_decode(response.body)
         self.assertEqual(self.email, body_2['email'])
         self.assertEqual(self.display_name, body_2['displayName'])
+        self.assertEqual(self.phone_number, body_2['phoneNumber'])
+        self.assertEqual(self.address, body_2['address'])
+        self.assertEqual(self.date_of_birth, body_2['dateOfBirth'])
+        self.assertEqual(self.full_name, body_2['fullName'])
+        self.assertEqual(self.disabilities, body_2['disabilities'])
+
 
     def test_user_without_token(self):
         response = self.fetch('/user')
